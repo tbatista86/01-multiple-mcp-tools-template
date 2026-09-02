@@ -13,8 +13,8 @@ services:
     environment:
       ME_CONFIG_MONGODB_SERVER: mongodb
       ME_CONFIG_MONGODB_PORT: 27017
-      ME_CONFIG_BASICAUTH_USERNAME: erickwendel
-      ME_CONFIG_BASICAUTH_PASSWORD: abc123
+      ME_CONFIG_BASICAUTH_USERNAME: 
+      ME_CONFIG_BASICAUTH_PASSWORD: 
 
     ports:
       - "8081:8081"
