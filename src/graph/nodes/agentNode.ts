@@ -1,4 +1,5 @@
 import { AIMessage } from 'langchain';
+import { getSystemPrompt, getUserPrompt } from '../../prompts/v1/agentNode.ts';
 import { OpenRouterService } from '../../services/openRouterService.ts';
 import type { GraphState } from '../state.ts';
 
@@ -7,9 +8,24 @@ export function agentNode(openRouterService: OpenRouterService) {
         console.log('🤖 Agent node processing...');
         try {
 
+            const userMessage = getUserPrompt({
+                intent: state.intent!,
+                fileName: state.fileName!,
+                fileContent: state.fileContent!,
+            });
+
+            const result = await openRouterService.generateStructured(
+                getSystemPrompt(),
+                userMessage,
+                undefined,
+                { useTools: false },
+            );
+
+            const answer = result.data as string;
 
             return {
-                messages: [new AIMessage('Nothing yet!')]
+                answer,
+                messages: [new AIMessage(answer)],
             };
 
         } catch (error) {

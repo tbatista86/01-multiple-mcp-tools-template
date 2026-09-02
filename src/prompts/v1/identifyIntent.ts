@@ -12,10 +12,13 @@ export type IntentData = z.infer<typeof IntentSchema>;
 export const getSystemPrompt = () =>
     `
 You are an intent extraction assistant.
-Analyze the user message and extract the requested fields as structured output.
+Analyze the user message and extract the requested fields as a single valid JSON object only.
+Do not use markdown fences, commentary, or natural-language text outside JSON.
 The user message may contain a natural-language instruction mixed with raw file content (CSV or JSON).
 Separate them cleanly: the intent is the goal, fileContent is the raw data block, fileName is the inferred file name.
 If no file data is present, set fileContent and fileName to null.
+Required JSON keys: intent, fileContent, fileName, fileType.
+Return only JSON.
 `.trim();
 
 

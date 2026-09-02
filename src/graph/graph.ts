@@ -1,7 +1,7 @@
-import { StateGraph, START, END } from '@langchain/langgraph';
-import { intentNode } from './nodes/intentNode.ts';
-import { agentNode } from './nodes/agentNode.ts';
+import { END, START, StateGraph } from '@langchain/langgraph';
 import { OpenRouterService } from '../services/openRouterService.ts';
+import { agentNode } from './nodes/agentNode.ts';
+import { intentNode } from './nodes/intentNode.ts';
 import { GraphAnnotation, type GraphState } from './state.ts';
 
 export function buildGraphPipeline(openRouterService: OpenRouterService) {
@@ -15,5 +15,5 @@ export function buildGraphPipeline(openRouterService: OpenRouterService) {
     )
     .addEdge('agent', END)
 
-    .compile();
+    .compile({ recursionLimit: 50 });
 }

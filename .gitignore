@@ -8,3 +8,4 @@ outputs/
 
 # LangGraph API
 .langgraph_api
+docker-compose.yml
