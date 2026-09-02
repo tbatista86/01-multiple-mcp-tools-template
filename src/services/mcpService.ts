@@ -1,4 +1,5 @@
 import { MultiServerMCPClient } from "@langchain/mcp-adapters";
+import { getCSVToJSONTool } from "../tools/csvToJSONTool.ts";
 import { getMongodbTool } from "../tools/mongoDbTools.ts";
 
 
@@ -20,5 +21,8 @@ export const getMCPTools = async () => {
 
   const mcpTools = await client.getTools();
 
-  return [...mcpTools];
+  return [
+    ...mcpTools,
+    getCSVToJSONTool(),
+  ];
 };
